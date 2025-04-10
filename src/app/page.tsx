@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useEffect, useState } from "react";
 import Image from 'next/image';
 
 // const services = [
@@ -37,6 +38,21 @@ import Image from 'next/image';
 // ];
 
 export default function Home() {
+  const [isHovered, setIsHovered] = useState(false);
+  const fullText = "Scalable. Performant. Custom-built solutions for startups and enterprise teams";
+  const [typedText, setTypedText] = useState("");
+
+  useEffect(() => {
+    let index = 0;
+    const interval = setInterval(() => {
+      setTypedText((prev) => prev + fullText[index]);
+      index++;
+      if (index === fullText.length) clearInterval(interval);
+    }, 40); // typing speed in ms
+  
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <main className="bg-black text-white min-h-screen font-sans overflow-hidden">
       {/* Navbar */}
@@ -48,41 +64,70 @@ export default function Home() {
             alt="Karmun Logo"
             className="w-[50px] h-[50px] object-contain"
           />
-          <span className="ml-2 text-[24px] font-bold bg-[linear-gradient(90deg,#82F369_0%,#91CFFF_40%,#FFAACC_100%)] text-transparent bg-clip-text">
-            KarMun Inc.
-          </span>
+
+      <div className="ml-2 flex space-x-2 text-[24px] font-bold font-sans">
+            <motion.span
+              className="bg-gradient-to-r from-[#82F369] via-[#91CFFF] to-[#FFAACC] text-transparent bg-clip-text"
+              initial={{ opacity: 0.4 }}
+              animate={{ opacity: [0.4, 1, 0.4] }}
+              transition={{ repeat: Infinity, duration: 5, delay: 0 }}
+            >
+              KarMun
+            </motion.span>
+
+            <motion.span
+              className="bg-gradient-to-r from-[#FFAACC] via-[#91CFFF] to-[#82F369] text-transparent bg-clip-text"
+              initial={{ opacity: 0.4 }}
+              animate={{ opacity: [0.4, 1, 0.4] }}
+              transition={{ repeat: Infinity, duration: 5, delay: 2.5 }}
+            >
+              Inc.
+            </motion.span>
+          </div>
         </div>
 
         {/* Center: Navigation Buttons */}
         <nav className="flex gap-4 absolute left-1/2 transform -translate-x-1/2">
           {["Services", "About", "Home"].map((label, idx) => (
-            <div
-              key={idx}
-              className="rounded-[20px] p-[2px]"
-              style={{
-                background: "linear-gradient(90deg, #82F369 , #91CFFF, #FFAACC)",
-                borderRadius: "20px",
-              }}
+            <motion.div
+            key={idx}
+            className="rounded-[20px] p-[2px]"
+            style={{
+              background: "linear-gradient(90deg, #82F369 , #91CFFF, #FFAACC)",
+              borderRadius: "20px",
+            }}
+            whileHover={{ scale: 1.08 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <motion.button
+              className="w-[135px] h-[56px] rounded-[18px] bg-black text-white font-medium"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 200 }}
             >
-              <button className="w-[135px] h-[56px] rounded-[18px] bg-black text-white font-medium">
-                {label}
-              </button>
-            </div>
+              {label}
+            </motion.button>
+          </motion.div>
           ))}
         </nav>
 
         {/* Contact Button */}
-        <div
+        <motion.div
           className="rounded-[20px] p-[2px]"
           style={{
             background:
               "linear-gradient(90deg, #FFC0CB 0%, #FF7F50 25%, #DC143C 50%, #8B0000 75%)",
           }}
+          whileHover={{ scale: 1.08 }}
+          transition={{ type: "spring", stiffness: 300 }}
         >
-          <button className="w-[135px] h-[56px] rounded-[18px] bg-black font-medium text-[#FF5E5E]">
+          <motion.button
+            className="w-[135px] h-[56px] rounded-[18px] bg-black font-medium text-[#FF5E5E]"
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 200 }}
+          >
             Contact
-          </button>
-        </div>
+          </motion.button>
+        </motion.div>
       </header>
 
       {/* Hero Section */}
@@ -108,21 +153,32 @@ export default function Home() {
           </h2>
         </div>
 
-        {/* Subheading */}
+        {/* Subheading with Typewriter Animation */}
         <div className="absolute top-[430px] left-[291px] w-[858px] h-[53px]">
           <p className="text-center font-[700] text-[24px] leading-[100%] tracking-[0%] text-[#8B8B8B] font-genos">
-            Scalable. Performant. Custom-built solutions for startups and enterprise teams
+            {typedText}
+            <span className="animate-pulse">|</span> {/* blinking cursor */}
           </p>
         </div>
 
         {/* Metrics Image */}
-        <div className="absolute top-[503px] left-[395px] w-[650.25px] h-[220px]">
+        <div className="absolute top-[503px] left-[395px] w-[650.25px] h-[220px] perspective-[1000px]">
+        <motion.div
+          className="w-full h-full"
+          style={{ transformStyle: "preserve-3d" }}
+          animate={{ rotateY: isHovered ? 360 : 0 }}
+          transition={{ duration: 1, ease: "easeInOut" }}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
           <img
             src="/100.png"
             alt="Metrics Overview"
             className="w-full h-full object-contain"
           />
-        </div>
+        </motion.div>
+      </div>
+
 
         {/* Gradient Bordered Image */}
         <div
@@ -141,7 +197,7 @@ export default function Home() {
           />
         </div>
 
-        {/* New Text Section (as requested) */}
+        {/* New Text Section */}
         <div className="absolute top-[913px] left-[438px] w-[564px] h-[48px]">
           <p className="text-center font-genos font-bold text-[24px] leading-[100%] text-[#8B8B8B]">
             Reach out to discuss your project or just say hello we're always up for a good conversation.
