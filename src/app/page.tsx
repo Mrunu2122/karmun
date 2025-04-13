@@ -3,6 +3,7 @@
 import React from "react";
 import Home from "@/components/home";
 import Service from "@/components/service";
+import About from "@/components/about";
 
 
 const page = () => {
@@ -10,6 +11,7 @@ const page = () => {
     <div className="bg-black">
       <Home />
       <Service/>
+      <About />
     </div>
   );
 };
