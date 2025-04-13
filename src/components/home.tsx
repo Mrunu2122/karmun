@@ -1,22 +1,27 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import LighthouseScore from "./lightHouseScore";
 import Marquee from "./Marquee";
 
+const fullText =
+  "Scalable. Performant. Custom-built solutions for startups and enterprise teams";
+
 export default function Home() {
-  const fullText =
-    "Scalable. Performant. Custom-built solutions for startups  and enterprise teams";
   const [typedText, setTypedText] = useState("");
+  const indexRef = useRef(0); // Use ref instead of local variable
 
   useEffect(() => {
-    let index = 0;
     const interval = setInterval(() => {
-      setTypedText((prev) => prev + fullText[index]);
-      index++;
-      if (index === fullText.length) clearInterval(interval);
-    }, 40); 
+      const nextChar = fullText[indexRef.current];
+      if (nextChar !== undefined) {
+        setTypedText((prev) => prev + nextChar);
+        indexRef.current += 1;
+      } else {
+        clearInterval(interval);
+      }
+    }, 40);
 
     return () => clearInterval(interval);
   }, []);
