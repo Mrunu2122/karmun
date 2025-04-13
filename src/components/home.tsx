@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import LighthouseScore from "./lightHouseScore";
 import Marquee from "./Marquee";
-import RandomText from "./randomText";
 
 export default function Home() {
   const fullText =
@@ -46,7 +45,6 @@ export default function Home() {
         </p>
       </div>
       <LighthouseScore />
-      <RandomText />
       <Marquee />
     </motion.section>
   );

@@ -29,7 +29,7 @@ export default function Marquee() {
   }, []);
 
   return (
-    <div className="relative overflow-hidden bg-black text-white py-3">
+    <div className="relative overflow-hidden bg-black text-white py-5">
       <motion.div
         className="text-center font-genos font-bold text-[24px] leading-[100%] text-[#8B8B8B]"
         animate={{
