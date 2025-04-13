@@ -1,7 +1,8 @@
 "use client";
+
 import Image from "next/image";
-import { useTransform, motion, useScroll} from "framer-motion"; 
-import { JSX, useRef } from "react";
+import { useTransform, motion, useScroll } from "framer-motion";
+import { useRef } from "react";
 
 // Images
 import AI from "../../public/Devices/Ai.png";
@@ -67,7 +68,14 @@ export default function Index() {
 
   return (
     <main className="bg-black" ref={container}>
-      <section className="text-white w-full ">
+      <h2 className="tracking-[1px] md:tracking-[2px] text-[38px] md:text-[56px] lg:text-[74px] leading-[110%] text-center font-[400]">
+        <span className="bg-gradient-to-r from-[#0271C5] via-[#FDBE00] to-[#FDBE00] text-transparent bg-clip-text font-gajraj">
+          Service
+        </span>{" "}
+        <span className="text-white font-montserrat">we Provide</span>
+      </h2>
+      {/* Desktop: Vertical Scroll Stack */}
+      <section className="hidden md:block text-white w-full">
         {card.map((card, i) => {
           const targetScale = 1 - (card.length - i) * 0.05;
           return (
@@ -84,11 +92,29 @@ export default function Index() {
           );
         })}
       </section>
+
+      {/* Mobile: Horizontal Scroll */}
+      <section className="md:hidden overflow-x-auto snap-x snap-mandatory flex gap-4 px-4 py-10">
+        {card.map((card, i) => (
+          <motion.div
+            key={i}
+            className="flex-shrink-0 w-[85%] snap-center bg-white/5 border border-white/20 rounded-3xl p-5 text-white"
+          >
+            <div className="w-full h-[200px] mb-4 overflow-hidden rounded-lg">
+              <Image
+                src={card.src}
+                alt={card.title}
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <h3 className="text-xl font-semibold mb-2">{card.title}</h3>
+            <p className="text-base">{card.Desc}</p>
+          </motion.div>
+        ))}
+      </section>
     </main>
   );
 }
-
-
 
 export const Card = ({
   i,
@@ -105,7 +131,7 @@ export const Card = ({
     offset: ["start end", "start start"],
   });
 
-const imageScale = useTransform(scrollYProgress, [0, 1], [1.05, 1]);
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1.05, 1]);
   const scale = useTransform(progress, range, [1, targetScale]);
 
   return (
@@ -113,15 +139,17 @@ const imageScale = useTransform(scrollYProgress, [0, 1], [1.05, 1]);
       ref={container}
       className="h-screen flex items-center justify-center sticky top-0"
     >
+   
       <motion.div
         style={{
           scale,
           top: `calc(-5vh + ${i * 15}px)`,
         }}
-        className="flex flex-col  items-center justify-center h-[400px] w-[1008px] rounded-[50px] p-10  bg-black border-[1px]  "
+        className="flex flex-col items-center justify-center h-[400px] w-[1008px] rounded-[50px] p-10 bg-black border border-white/20"
       >
-        <div className="flex h-full mt-5 gap-10">
-          <div className=" w-[50%] h-full rounded-lg overflow-hidden">
+
+        <div className="flex h-full gap-10">
+          <div className="w-[50%] h-full rounded-lg overflow-hidden">
             <motion.div style={{ scale: imageScale }}>
               <Image
                 src={src}

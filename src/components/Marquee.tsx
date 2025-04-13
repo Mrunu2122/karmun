@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect,useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 export default function Marquee() {
@@ -13,9 +13,9 @@ export default function Marquee() {
     const prevScroll = prevScrollRef.current;
 
     if (currentScroll > prevScroll) {
-      setScrollDirection("right"); 
+      setScrollDirection("right");
     } else {
-      setScrollDirection("left"); 
+      setScrollDirection("left");
     }
 
     prevScrollRef.current = currentScroll;
@@ -29,16 +29,33 @@ export default function Marquee() {
   }, []);
 
   return (
-    <div className="relative overflow-hidden bg-black text-white py-5">
+    <div className="relative hidden md:block overflow-hidden bg-black text-white py-5">
+      {/* Single-line scrolling text for mobile */}
       <motion.div
-        className="text-center font-genos font-bold text-[24px] leading-[100%] text-[#8B8B8B]"
+        className="whitespace-nowrap text-center font-genos font-bold text-[24px] leading-[100%] text-[#8B8B8B] md:hidden"
         animate={{
-          x: scrollDirection === "right" ? "100%" : "-100%", 
+          x: scrollDirection === "right" ? "100%" : "-100%",
         }}
         transition={{
-          duration: 30, 
+          duration: 30,
           ease: "linear",
-          repeat: Infinity, 
+          repeat: Infinity,
+        }}
+      >
+        Reach out to discuss your project or just say hello — we&apos;re always
+        up for a good conversation.
+      </motion.div>
+
+      {/* Two-line scrolling text for larger screens */}
+      <motion.div
+        className="hidden md:block whitespace-nowrap text-center font-genos font-bold text-[24px] leading-[100%] text-[#8B8B8B]"
+        animate={{
+          x: scrollDirection === "right" ? "100%" : "-100%",
+        }}
+        transition={{
+          duration: 30,
+          ease: "linear",
+          repeat: Infinity,
         }}
       >
         Reach out to discuss your project or just say hello — we&apos;re always
@@ -46,14 +63,14 @@ export default function Marquee() {
       </motion.div>
 
       <motion.div
-        className="text-center font-genos font-bold text-[24px] leading-[100%] text-[#8B8B8B]"
+        className="hidden md:block whitespace-nowrap text-center font-genos font-bold text-[24px] leading-[100%] text-[#8B8B8B]"
         animate={{
-          x: scrollDirection === "left" ? "100%" : "-100%", 
+          x: scrollDirection === "left" ? "100%" : "-100%",
         }}
         transition={{
-          duration: 30, // Same duration for both
+          duration: 30,
           ease: "linear",
-          repeat: Infinity, // Infinite loop
+          repeat: Infinity,
         }}
       >
         Reach out to discuss your project or just say hello — we&apos;re always

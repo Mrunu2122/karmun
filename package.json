@@ -13,6 +13,7 @@
     "@studio-freight/lenis": "^1.0.42",
     "framer-motion": "^12.6.3",
     "lenis": "^1.2.3",
+    "lucide-react": "^0.487.0",
     "motion": "^12.6.5",
     "next": "15.2.5",
     "react": "^19.0.0",

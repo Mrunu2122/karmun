@@ -11,9 +11,8 @@ type ScoreItem = {
 function getColor(percent: number) {
   if (percent < 50) return "#DC2626"; // Tailwind red-600
   if (percent < 80) return "#FBBF24"; // Tailwind yellow-400
-  return "#1E6701"; 
+  return "#1E6701"; // Custom green
 }
-
 
 const scores: ScoreItem[] = [
   { label: "Performance", score: 100 },
@@ -24,7 +23,7 @@ const scores: ScoreItem[] = [
 
 export default function LighthouseScore() {
   return (
-    <div className="flex justify-center gap-10 pt-10 px-6 rounded-xl">
+    <div className="flex flex-wrap justify-center gap-6 md:gap-10 pt-8 px-4 md:px-6 rounded-xl">
       {scores.map((item, idx) => (
         <AnimatedCircle key={idx} label={item.label} score={item.score} />
       ))}
@@ -41,7 +40,7 @@ function AnimatedCircle({ label, score }: { label: string; score: number }) {
     const interval = setInterval(() => {
       if (current <= score) {
         setCounter(current);
-        setPercent(current); // same value drives the circle
+        setPercent(current);
         current++;
       } else {
         clearInterval(interval);
@@ -52,10 +51,10 @@ function AnimatedCircle({ label, score }: { label: string; score: number }) {
   }, [score]);
 
   return (
-    <div className="text-white text-center leading-2">
+    <div className="text-white text-center leading-2 w-[80px]">
       {/* Outer circle with conic gradient animation */}
       <div
-        className="w-[80px] h-[80px] rounded-full p-[6px] mx-auto "
+        className="w-[80px] h-[80px] rounded-full p-[6px] mx-auto"
         style={{
           background: `conic-gradient(${getColor(
             percent
@@ -65,7 +64,7 @@ function AnimatedCircle({ label, score }: { label: string; score: number }) {
       >
         <div className="bg-black w-full h-full rounded-full flex items-center justify-center">
           <motion.span
-            className="font-roboto text-[24px] font-bold"
+            className="font-roboto text-[20px] md:text-[24px] font-bold"
             style={{ color: getColor(percent) }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -77,7 +76,7 @@ function AnimatedCircle({ label, score }: { label: string; score: number }) {
       </div>
 
       {/* Label */}
-      <p className="mt-3 text-white font-openSans font-bold text-[14px] leading-tight">
+      <p className="mt-2 md:mt-3 text-white font-openSans font-bold text-[12px] md:text-[14px] leading-tight">
         {label.split(" ").map((word, i) => (
           <span key={i} className="block">
             {word}
