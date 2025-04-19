@@ -68,14 +68,19 @@ const Navbar = () => {
         <div className="hidden md:block">
           <motion.button
             type="button"
+            className="relative rounded-[20px] p-[2px]"
             whileHover={{ scale: 1.08 }}
             transition={{ type: "spring", stiffness: 300 }}
-            className="group relative inline-flex h-12 border-2 overflow-hidden rounded-full p-[2px] focus:outline-none mt-4"
           >
-            <span className="absolute inset-[-1000%] bg-[conic-gradient(from_0deg,#82F369,#91CFFF,#FFAACC,#82F369)] group-hover:animate-[spin_2s_linear_infinite]" />
-            <span className="relative inline-flex h-full w-full items-center justify-center rounded-full bg-black px-9 py-2 text-sm font-medium text-white capitalize">
-              Contact
-            </span>
+            <button
+              type="button"
+              className="group relative inline-flex h-12 overflow-hidden rounded-full p-[2px] focus:outline-none"
+            >
+              <span className="absolute inset-[-1000%] bg-[conic-gradient(from_0deg,#82F369,#91CFFF,#FFAACC,#82F369)] group-hover:animate-[spin_2s_linear_infinite]" />
+              <span className="relative inline-flex h-full w-full items-center justify-center rounded-full bg-black px-8 py-1 text-sm font-medium text-white capitalize">
+                Contact
+              </span>
+            </button>
           </motion.button>
         </div>
 
