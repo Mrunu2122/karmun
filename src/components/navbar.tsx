@@ -12,7 +12,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="w-full h-[69px] flex items-center justify-between px-6 md:px-10 bg-black relative z-50">
+      <nav className="w-full h-[69px] flex items-center justify-between px-6 md:px-10 bg-whit relative z-50">
         {/* Left: Logo */}
         <div className="flex items-center">
           <Image
@@ -20,21 +20,21 @@ const Navbar = () => {
             alt="Karmun Logo"
             width={50}
             height={50}
-            className="w-[50px] h-[50px] object-contain"
+            className="w-[100px] h-[100px] object-contain"
           />
           <div className="ml-2 flex space-x-2 text-[24px] font-bold font-sans">
             <motion.span
-              className="bg-gradient-to-r from-[#82F369] via-[#91CFFF] to-[#FFAACC] text-transparent bg-clip-text"
-              initial={{ opacity: 0.4 }}
-              animate={{ opacity: [0.4, 1, 0.4] }}
+              className="bg-gradient-to-r from-[#2EFF00] via-[#2EA4FF] to-[#FF0066] text-transparent bg-clip-text"
+              initial={{ opacity: 0.1 }}
+              animate={{ opacity: [0.8, 1, 0.8] }}
               transition={{ repeat: Infinity, duration: 5 }}
             >
               KarMun
             </motion.span>
             <motion.span
-              className="bg-gradient-to-r from-[#FFAACC] via-[#91CFFF] to-[#82F369] text-transparent bg-clip-text"
-              initial={{ opacity: 0.4 }}
-              animate={{ opacity: [0.4, 1, 0.4] }}
+              className="bg-gradient-to-r to-[#2EFF00] via-[#2EA4FF] from-[#FF0066] text-transparent bg-clip-text"
+              initial={{ opacity: 0.1 }}
+              animate={{ opacity: [0.8, 1, 0.8] }}
               transition={{ repeat: Infinity, duration: 5, delay: 2.5 }}
             >
               Inc.
@@ -51,7 +51,10 @@ const Navbar = () => {
               whileHover={{ scale: 1.08 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              <button className="group relative inline-flex h-12 overflow-hidden rounded-full p-[2px] focus:outline-none">
+              <button
+                type="button"
+                className="group relative inline-flex h-12 overflow-hidden rounded-full p-[2px] focus:outline-none"
+              >
                 <span className="absolute inset-[-1000%] bg-[conic-gradient(from_0deg,#82F369,#91CFFF,#FFAACC,#82F369)] group-hover:animate-[spin_2s_linear_infinite]" />
                 <span className="relative inline-flex h-full w-full items-center justify-center rounded-full bg-black px-8 py-1 text-sm font-medium text-white capitalize">
                   {label}
@@ -65,10 +68,12 @@ const Navbar = () => {
         <div className="hidden md:block">
           <motion.button
             type="button"
-            className="group relative inline-flex h-12 border-2 overflow-hidden rounded-full p-[2px] focus:outline-none"
+            whileHover={{ scale: 1.08 }}
+            transition={{ type: "spring", stiffness: 300 }}
+            className="group relative inline-flex h-12 border-2 overflow-hidden rounded-full p-[2px] focus:outline-none mt-4"
           >
             <span className="absolute inset-[-1000%] bg-[conic-gradient(from_0deg,#82F369,#91CFFF,#FFAACC,#82F369)] group-hover:animate-[spin_2s_linear_infinite]" />
-            <span className="relative inline-flex h-full w-full items-center justify-center rounded-full bg-black px-8 py-1 text-sm font-medium text-white capitalize">
+            <span className="relative inline-flex h-full w-full items-center justify-center rounded-full bg-black px-9 py-2 text-sm font-medium text-white capitalize">
               Contact
             </span>
           </motion.button>

@@ -29,7 +29,7 @@ export default function Marquee() {
   }, []);
 
   return (
-    <div className="relative hidden md:block overflow-hidden bg-black text-white py-5">
+    <div className="relative hidden md:block overflow-hidden  text-black py-5">
       {/* Single-line scrolling text for mobile */}
       <motion.div
         className="whitespace-nowrap text-center font-genos font-bold text-[24px] leading-[100%] text-[#8B8B8B] md:hidden"

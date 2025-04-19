@@ -28,12 +28,12 @@ export default function Home() {
 
   return (
     <motion.section
-      className="flex flex-col items-center justify-center text-center min-h-screen px-4 bg-black"
+      className="flex flex-col items-center justify-center text-center min-h-screen px-4 bg-white"
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
     >
-      <h2 className="text-white font-aclonica font-normal text-[38px] md:text-[56px] lg:text-[74px] leading-[110%] font-montserrat">
+      <h2 className="text-black font-aclonica font-normal text-[38px] md:text-[56px] lg:text-[74px] leading-[110%] font-playfair">
         Your Partner in Digital
       </h2>
 

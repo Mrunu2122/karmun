@@ -8,7 +8,7 @@ import About from "@/components/about";
 
 const page = () => {
   return (
-    <div className="bg-black">
+    <div>
       <Home />
       <Service/>
       <About />

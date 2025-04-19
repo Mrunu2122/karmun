@@ -51,7 +51,7 @@ function AnimatedCircle({ label, score }: { label: string; score: number }) {
   }, [score]);
 
   return (
-    <div className="text-white text-center leading-2 w-[80px]">
+    <div className="text-black text-center leading-2 w-[80px]">
       {/* Outer circle with conic gradient animation */}
       <div
         className="w-[80px] h-[80px] rounded-full p-[6px] mx-auto"
@@ -62,9 +62,9 @@ function AnimatedCircle({ label, score }: { label: string; score: number }) {
           transition: "background 0.2s linear",
         }}
       >
-        <div className="bg-black w-full h-full rounded-full flex items-center justify-center">
+        <div className="bg-white w-full h-full rounded-full flex items-center justify-center">
           <motion.span
-            className="font-roboto text-[20px] md:text-[24px] font-bold"
+            className="font-roboto text-[20px] md:text-[24px] font-bold "
             style={{ color: getColor(percent) }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -76,7 +76,7 @@ function AnimatedCircle({ label, score }: { label: string; score: number }) {
       </div>
 
       {/* Label */}
-      <p className="mt-2 md:mt-3 text-white font-openSans font-bold text-[12px] md:text-[14px] leading-tight">
+      <p className="mt-2 md:mt-3 text-black font-openSans font-bold text-[12px] md:text-[14px] leading-tight">
         {label.split(" ").map((word, i) => (
           <span key={i} className="block">
             {word}

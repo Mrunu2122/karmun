@@ -67,12 +67,12 @@ export default function Index() {
   });
 
   return (
-    <main className="bg-black" ref={container}>
+    <main ref={container}>
       <h2 className="tracking-[1px] md:tracking-[2px] text-[38px] md:text-[56px] lg:text-[74px] leading-[110%] text-center font-[400]">
         <span className="bg-gradient-to-r from-[#0271C5] via-[#FDBE00] to-[#FDBE00] text-transparent bg-clip-text font-gajraj">
           Service
         </span>{" "}
-        <span className="text-white font-montserrat">we Provide</span>
+        <span className="text-black font-montserrat">we Provide</span>
       </h2>
       {/* Desktop: Vertical Scroll Stack */}
       <section className="hidden md:block text-white w-full">
@@ -98,7 +98,7 @@ export default function Index() {
         {card.map((card, i) => (
           <motion.div
             key={i}
-            className="flex-shrink-0 w-[85%] snap-center bg-white/5 border border-white/20 rounded-3xl p-5 text-white"
+            className="flex-shrink-0 w-[85%] snap-center bg-white border border-black rounded-3xl p-5 text-white"
           >
             <div className="w-full h-[200px] mb-4 overflow-hidden rounded-lg">
               <Image
@@ -107,7 +107,9 @@ export default function Index() {
                 className="w-full h-full object-cover"
               />
             </div>
-            <h3 className="text-xl font-semibold mb-2">{card.title}</h3>
+            <h3 className="text-xl font-semibold mb-2 text-white">
+              {card.title}
+            </h3>
             <p className="text-base">{card.Desc}</p>
           </motion.div>
         ))}
@@ -137,17 +139,16 @@ export const Card = ({
   return (
     <div
       ref={container}
-      className="h-screen flex items-center justify-center sticky top-0"
+      className="h-screen flex flex-col items-center justify-center sticky top-0"
     >
-   
+      
       <motion.div
         style={{
           scale,
           top: `calc(-5vh + ${i * 15}px)`,
         }}
-        className="flex flex-col items-center justify-center h-[400px] w-[1008px] rounded-[50px] p-10 bg-black border border-white/20"
+        className="flex flex-col items-center justify-center h-[400px] w-[1008px] rounded-[50px] p-10 bg-[#f0f0f0] border border-black/20"
       >
-
         <div className="flex h-full gap-10">
           <div className="w-[50%] h-full rounded-lg overflow-hidden">
             <motion.div style={{ scale: imageScale }}>
@@ -162,8 +163,10 @@ export const Card = ({
             </motion.div>
           </div>
           <div className="w-[50%]">
-            <h2 className="text-[30px] text-center font-semibold">{title}</h2>
-            <p className="text-[24px] mt-10">{description}</p>
+            <h2 className="text-[30px] text-center font-semibold text-black">
+              {title}
+            </h2>
+            <p className="text-[24px] mt-10 text-black">{description}</p>
           </div>
         </div>
       </motion.div>
