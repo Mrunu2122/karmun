@@ -37,7 +37,7 @@ export default function Home() {
         Your Partner in Digital
       </h2>
 
-      <h2 className="font-gajraj tracking-[1px] md:tracking-[2px] text-[38px] md:text-[56px] lg:text-[74px] leading-[110%] mt-4 md:mt-5">
+      <h2 className="font-playfair tracking-[1px] md:tracking-[2px] text-[38px] md:text-[56px] lg:text-[74px] leading-[110%] mt-4 md:mt-5">
         <span className="bg-gradient-to-r from-[#0271C5] to-[#FDBE00] text-transparent bg-clip-text">
           Transformation
         </span>

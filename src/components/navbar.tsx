@@ -56,7 +56,7 @@ const Navbar = () => {
                 className="group relative inline-flex h-12 overflow-hidden rounded-full p-[2px] focus:outline-none"
               >
                 <span className="absolute inset-[-1000%] bg-[conic-gradient(from_0deg,#82F369,#91CFFF,#FFAACC,#82F369)] group-hover:animate-[spin_2s_linear_infinite]" />
-                <span className="relative inline-flex h-full w-full items-center justify-center rounded-full bg-black px-8 py-1 text-sm font-medium text-white capitalize">
+                <span className="relative inline-flex h-full w-full items-center justify-center rounded-full text-black px-8 py-1 text-sm font-medium bg-white capitalize">
                   {label}
                 </span>
               </button>
@@ -72,15 +72,14 @@ const Navbar = () => {
             whileHover={{ scale: 1.08 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
-            <button
-              type="button"
+            <p
               className="group relative inline-flex h-12 overflow-hidden rounded-full p-[2px] focus:outline-none"
             >
               <span className="absolute inset-[-1000%] bg-[conic-gradient(from_0deg,#82F369,#91CFFF,#FFAACC,#82F369)] group-hover:animate-[spin_2s_linear_infinite]" />
-              <span className="relative inline-flex h-full w-full items-center justify-center rounded-full bg-black px-8 py-1 text-sm font-medium text-white capitalize">
+              <span className="relative inline-flex h-full w-full items-center justify-center rounded-full text-black px-8 py-1 text-sm font-medium bg-white capitalize">
                 Contact
               </span>
-            </button>
+            </p>
           </motion.button>
         </div>
 
