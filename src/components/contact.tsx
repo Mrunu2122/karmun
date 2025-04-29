@@ -1,262 +1,95 @@
-"use client";
+import React from "react";
+import Image from "next/image";
 
-import React, { useState } from "react";
-
-const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    projectType: "",
-    projectBudget: "",
-    description: "",
-  });
-
-  const [formError, setFormError] = useState({
-    name: "",
-    email: "",
-    projectType: "",
-    projectBudget: "",
-    description: "",
-  });
-
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const validateForm = () => {
-    const errors = { ...formError };
-
-    if (!formData.name) {
-      errors.name = "Name is required.";
-    } else {
-      errors.name = "";
-    }
-
-    if (!formData.email || !/\S+@\S+\.\S+/.test(formData.email)) {
-      errors.email = "Valid email is required.";
-    } else {
-      errors.email = "";
-    }
-
-    if (!formData.projectType) {
-      errors.projectType = "Project type is required.";
-    } else {
-      errors.projectType = "";
-    }
-
-    if (!formData.projectBudget) {
-      errors.projectBudget = "Project budget is required.";
-    } else {
-      errors.projectBudget = "";
-    }
-
-    if (!formData.description) {
-      errors.description = "Description is required.";
-    } else {
-      errors.description = "";
-    }
-
-    setFormError(errors);
-
-    return Object.values(errors).every((error) => error === "");
-  };
-
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
-  ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    if (!validateForm()) {
-      return;
-    }
-
-    // Create a message format for WhatsApp
-    const message = `*New Contact Form Submission*\n\nName: ${formData.name}\nEmail: ${formData.email}\nProject Type: ${formData.projectType}\nProject Budget: ${formData.projectBudget}\nDescription: ${formData.description}`;
-
-    // Encode the message to handle special characters
-    const encodedMessage = encodeURIComponent(message);
-
-    // WhatsApp API link (replace with your actual phone number)
-    const whatsappLink = `https://wa.me/918180811338?text=${encodedMessage}`;
-
-    // Redirect to WhatsApp with the message pre-filled
-    window.open(whatsappLink, "_blank");
-
-    // Optionally, reset the form and show success message
-    setIsSubmitted(true);
-    setFormData({
-      name: "",
-      email: "",
-      projectType: "",
-      projectBudget: "",
-      description: "",
-    });
-  };
-
+const Contact: React.FC = () => {
   return (
-    <div className="px-4 py-12">
-      <h2 className="tracking-tight text-[38px] md:text-[56px] lg:text-[74px] text-center font-[400] mb-12">
-        <span className="bg-gradient-to-r from-[#0271C5] via-[#FDBE00] to-[#FDBE00] text-transparent bg-clip-text font-gajraj">
-          Let&apos;s
+    <section className="bg-white text-black min-h-screen flex flex-col items-center justify-center px-4 py-12">
+      {/* Centered Heading */}
+      <h2 className="font-gajraj text-7xl font-bold text-center mb-12">
+        <span className="text-blue-500">Lets</span>{" "}
+        <span className="bg-gradient-to-r from-green-400 via-yellow-400 to-yellow-500 text-transparent bg-clip-text">
+          Connect
         </span>
-        <span className="text-black font-montserrat"> Connect</span>
       </h2>
 
-      <div>
-        {isSubmitted && (
-          <div className="text-center text-green-500 mb-6">
-            <p>Thank you for your submission! We will get back to you soon.</p>
-          </div>
-        )}
-        <form
-          onSubmit={handleSubmit}
-          className="flex flex-col gap-6 w-full max-w-2xl mx-auto bg-white/80 backdrop-blur-md p-8 rounded-2xl shadow-xl"
-        >
-          {/* Name */}
-          <div className="relative">
-            <input
-              type="text"
-              name="name"
-              id="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              className="peer w-full border-b-2 border-gray-300 bg-transparent py-4 placeholder-transparent focus:border-black focus:outline-none"
-              placeholder="Your Name"
-            />
-            <label
-              htmlFor="name"
-              className="absolute left-0 -top-2.5 text-gray-600 text-sm transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-gray-600"
-            >
-              Your Name
-            </label>
-            {formError.name && (
-              <p className="text-red-500 text-sm mt-1">{formError.name}</p>
-            )}
-          </div>
+      {/* Grid Layout for Image + Form */}
+      <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+        
+        {/* Left - Join Now Arrow Image */}
+        <div className="flex justify-center">
+          <Image
+            src="/CallButton.png"
+            alt="Join Now Arrow"
+            width={160}
+            height={160}
+            className="object-contain"
+          />
+        </div>
 
-          {/* Email */}
-          <div className="relative">
-            <input
-              type="email"
-              name="email"
-              id="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="peer w-full border-b-2 border-gray-300 bg-transparent py-4 placeholder-transparent focus:border-black focus:outline-none"
-              placeholder="Your Email"
-            />
-            <label
-              htmlFor="email"
-              className="absolute left-0 -top-2.5 text-gray-600 text-sm transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-gray-600"
-            >
-              Your Email
-            </label>
-            {formError.email && (
-              <p className="text-red-500 text-sm mt-1">{formError.email}</p>
-            )}
-          </div>
+        {/* Right - Form */}
+        <div className="space-y-4">
+          <form className="space-y-4">
+            <div>
+              <label className="block mb-1 text-sm">Name</label>
+              <input
+                type="text"
+                placeholder="Your Name"
+                className="w-full px-4 py-2 rounded bg-white-800 border border-gray-600 focus:outline-none"
+              />
+            </div>
 
-          {/* Project Type */}
-          <div className="relative">
-            <select
-              name="projectType"
-              id="projectType"
-              value={formData.projectType}
-              onChange={handleChange}
-              required
-              className="peer w-full border-b-2 border-gray-300 bg-transparent py-4 appearance-none focus:border-black focus:outline-none"
-            >
-              <option value="" disabled hidden>
-                Select project type
-              </option>
-              <option value="web">Web-Development</option>
-              <option value="mobile">Mobile-App</option>
-              <option value="design">UI/UX-Design</option>
-            </select>
-            <label
-              htmlFor="projectType"
-              className="absolute left-0 -top-2.5 text-gray-600 text-sm transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-gray-600"
-            >
-              Project Type
-            </label>
-            {formError.projectType && (
-              <p className="text-red-500 text-sm mt-1">
-                {formError.projectType}
-              </p>
-            )}
-          </div>
+            <div>
+              <label className="block mb-1 text-sm">Email</label>
+              <input
+                type="email"
+                placeholder="Your Email"
+                className="w-full px-4 py-2 rounded bg-white-800 border border-gray-600 focus:outline-none"
+              />
+            </div>
 
-          {/* Project Budget */}
-          <div className="relative">
-            <select
-              name="projectBudget"
-              id="projectBudget"
-              value={formData.projectBudget}
-              onChange={handleChange}
-              required
-              className="peer w-full border-b-2 border-gray-300 bg-transparent py-4 appearance-none focus:border-black focus:outline-none"
-            >
-              <option value="" disabled hidden>
-                Select project budget
-              </option>
-              <option value="under5k">Under ₹5,000</option>
-              <option value="5k-10k">₹5,000 - ₹10,000</option>
-              <option value="10k+">Above ₹10,000</option>
-            </select>
-            <label
-              htmlFor="projectBudget"
-              className="absolute left-0 -top-2.5 text-gray-600 text-sm transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-gray-600"
-            >
-              Project Budget
-            </label>
-            {formError.projectBudget && (
-              <p className="text-red-500 text-sm mt-1">
-                {formError.projectBudget}
-              </p>
-            )}
-          </div>
+            <div>
+              <label className="block mb-1 text-sm">
+                What service are you interested in
+              </label>
+              <select className="w-full px-4 py-2 rounded bg-white-800 border border-gray-600 focus:outline-none">
+                <option value="">Select project type</option>
+                <option value="website">Website Development</option>
+                <option value="design">UI/UX Design</option>
+                <option value="branding">Branding</option>
+              </select>
+            </div>
 
-          {/* Project Description */}
-          <div className="relative">
-            <textarea
-              name="description"
-              id="description"
-              value={formData.description}
-              onChange={handleChange}
-              rows={5}
-              required
-              className="peer w-full border-b-2 border-gray-300 bg-transparent py-4 placeholder-transparent focus:border-black focus:outline-none resize-none"
-              placeholder="Describe your project"
-            />
-            <label
-              htmlFor="description"
-              className="absolute left-0 -top-2.5 text-gray-600 text-sm transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-gray-600"
-            >
-              Describe your project
-            </label>
-            {formError.description && (
-              <p className="text-red-500 text-sm mt-1">
-                {formError.description}
-              </p>
-            )}
-          </div>
+            <div>
+              <label className="block mb-1 text-sm">Budget</label>
+              <select className="w-full px-4 py-2 rounded bg-white-800 border border-gray-600 focus:outline-none">
+                <option value="">Select project budget</option>
+                <option value="500-1000">500rs - 1000rs</option>
+                <option value="1000-3000">1000rs - 3000rs</option>
+                <option value="3000+">3000rs+</option>
+              </select>
+            </div>
 
-          {/* Submit Button */}
-          <button
-            type="submit"
-            className="mt-6 bg-black text-white py-4 rounded-xl hover:bg-gray-800 transition-all font-semibold tracking-wide"
-          >
-            Submit
-          </button>
-        </form>
+            <div>
+              <label className="block mb-1 text-sm">Message</label>
+              <textarea
+                rows={5}
+                placeholder="Tell us about your project"
+                className="w-full px-4 py-2 rounded bg-white-800 border border-gray-600 focus:outline-none"
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              className="w-full py-2 bg-black text-white font-semibold rounded transition transform hover:scale-105"
+            >
+              Submit
+            </button>
+
+
+          </form>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 
