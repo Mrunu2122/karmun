@@ -10,15 +10,18 @@
   },
   "dependencies": {
     "@motionone/utils": "^10.18.0",
+    "@react-three/drei": "^10.5.1",
+    "@react-three/fiber": "^9.2.0",
     "@studio-freight/lenis": "^1.0.42",
-    "framer-motion": "^12.6.3",
+    "framer-motion": "^12.23.6",
     "lenis": "^1.2.3",
     "lucide-react": "^0.487.0",
     "motion": "^12.6.5",
     "next": "15.2.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-simple-typewriter": "^5.0.1"
+    "react-simple-typewriter": "^5.0.1",
+    "three": "^0.178.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
