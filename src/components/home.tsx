@@ -1,110 +1,68 @@
 "use client";
 
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Html, useGLTF, Environment } from "@react-three/drei";
-import { motion } from "framer-motion";
-import { Suspense, useEffect, useRef, useState } from "react";
-import * as THREE from "three";
+import { motion, useAnimation } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import { useInView } from "react-intersection-observer";
 
-// Text to animate
-const fullText =
-  "Scalable. Performant. Custom-built solutions for startups and enterprise teams";
+const KarMunLogo = "/karmun-logo.png";
+const AboutImage = "/about-image.jpg";
 
-// Load the GLB model and ensure materials are preserved
-function FloatingScreen() {
-  const { scene } = useGLTF("/ui-screen.glb");
-
-  useEffect(() => {
-    scene.traverse((child) => {
-      if (child instanceof THREE.Mesh) {
-        child.material.side = THREE.DoubleSide;
-      }
-    });
-  }, [scene]);
-
-  return (
-    <primitive
-      object={scene}
-      scale={1.3}
-      position={[0, 0, 0]}
-      rotation={[0, Math.PI, 0]}
-    />
-  );
-}
-
-useGLTF.preload("/ui-screen.glb");
-
-// Canvas with lighting and environment
-function BackgroundCanvas() {
-  return (
-    <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
-      <ambientLight intensity={2} />
-      <directionalLight position={[5, 5, 5]} intensity={2} castShadow />
-
-      <Suspense fallback={<Html>Loading model...</Html>}>
-        <Environment preset="city" background />
-        <FloatingScreen />
-      </Suspense>
-
-      <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={1.5} />
-    </Canvas>
-  );
-}
-
-// Main Hero Section
 export default function Home() {
-  const [typedText, setTypedText] = useState("");
-  const indexRef = useRef(0);
+  const controls = useAnimation();
+  const [flipped, setFlipped] = useState(false);
+  const { ref: aboutRef, inView: aboutInView } = useInView({ threshold: 0.6 });
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      const nextChar = fullText[indexRef.current];
-      if (nextChar !== undefined) {
-        setTypedText((prev) => prev + nextChar);
-        indexRef.current += 1;
-      } else {
-        clearInterval(interval);
-      }
-    }, 30);
-    return () => clearInterval(interval);
-  }, []);
+    if (aboutInView) setFlipped(true);
+    else setFlipped(false);
+  }, [aboutInView]);
 
   return (
-    <div className="relative h-screen w-full overflow-hidden bg-white">
-      <div className="absolute inset-0 z-0">
-        <BackgroundCanvas />
-      </div>
-
-      <motion.section
-        className="relative z-10 flex flex-col items-center justify-center text-center h-full px-6"
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
+    <main className="relative min-h-[200vh] bg-[#F3F3F3] overflow-hidden">
+      {/* Animated Card */}
+      <motion.div
+        initial={{ top: "25%", y: "-50%" }}
+        animate={{
+          top: aboutInView ? "75%" : "25%",
+          rotateY: flipped ? 180 : 0,
+        }}
+        transition={{ duration: 1, ease: "easeInOut" }}
+        className="w-full absolute left-1/2 -translate-x-1/2 z-50 perspective"
       >
-        <h2 className="text-transparent bg-clip-text bg-gradient-to-r from-[#8B0000] to-[#5A1A1A] font-bold text-[34px] md:text-[60px] leading-tight font-playfair drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
-    Your Partner in Digital
-  </h2>
+        <div
+  className="w-[280px] h-[380px] md:w-[340px] md:h-[440px] relative [transform-style:preserve-3d] [transition:transform_1s]"
+  style={{ transform: flipped ? 'rotateY(180deg)' : 'rotateY(0deg)' }}
+>
+  {/* Front */}
+  <div className="absolute inset-0 [backface-visibility:hidden] flex items-center justify-center bg-white rounded-xl shadow-xl">
+    <Image src={KarMunLogo} alt="KarMun Logo" width={300} height={300} className="object-contain" />
+  </div>
 
-  {/* Subheading - Brighter Gradient, Clearer Text */}
-  <h2 className="text-transparent bg-clip-text bg-gradient-to-r from-[#00B2DB] to-[#FFD700] text-[34px] md:text-[60px] font-playfair mt-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]">
-    Transformation
-  </h2>
+  {/* Back */}
+  <div className="absolute inset-0 [transform:rotateY(180deg)] [backface-visibility:hidden] flex items-center justify-center bg-white rounded-xl shadow-xl">
+    <Image src={AboutImage} alt="About Image" width={300} height={300} className="object-contain" />
+  </div>
+</div>
 
-  {/* Typing Subtitle - Better Contrast + Shadow */}
-  <p className="mt-6 text-white text-[16px] md:text-[22px] max-w-2xl font-medium font-genos drop-shadow-[0_1px_2px_rgba(0,0,0,0.7)]">
-    {typedText}
-    <span className="animate-pulse">|</span>
-  </p>
+      </motion.div>
 
-  {/* Button - Strong BG and glow on hover */}
-  <motion.button
-    className="mt-8 px-6 py-3 rounded-xl bg-black text-white text-lg font-semibold hover:bg-gray-800 hover:shadow-xl transition"
-    whileHover={{ scale: 1.05 }}
-    whileTap={{ scale: 0.95 }}
-  >
-    Let’s Build Something
-  </motion.button>
-      </motion.section>
-    </div>
+      {/* Hero Content */}
+      <section className="h-screen flex items-center justify-center text-center px-6">
+        <div>
+          <h1 className="text-5xl font-bold text-[#121212] mb-6">
+            We Design Exceptional Experiences
+          </h1>
+          <p className="text-xl text-[#3A3A3A] max-w-xl mx-auto">
+            Creating meaningful interactions that elevate brands and delight users. Our approach blends creativity, strategy, and technology.
+          </p>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section ref={aboutRef} className="h-screen flex items-center justify-center text-center px-6">
+        <h2 className="text-3xl font-semibold text-gray-700">About Section</h2>
+      </section>
+    </main>
   );
 }
